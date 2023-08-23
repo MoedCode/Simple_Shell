@@ -1,0 +1,353 @@
+#ifndef MAIN_H
+#define MAIN_H
+
+/* Hraders*/
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+
+/*      GLOBAL VARABLS */
+extern size_t getLine ;
+extern int status;
+extern char *command ,**cmd_args , **PathArr;
+//*appName = NULL;
+
+/* MACROS */
+#define DEBUG(M) printf("%s%s:%d\n", M, __FILE__, __LINE__);
+#define FreeVar(var) do { \
+    if (var) { \
+        free(var); \
+       var = NULL; \
+    } \
+} while(0)
+
+#define FreeArr(arr) { \
+    if (arr) { \
+        freeDoubleArray(arr); \
+        arr = NULL; \
+    } \
+} while(0)
+
+
+
+/* Functions Prototype*/
+
+/* String.c */
+
+int Putchar(char c);
+int printTS( char* s, size_t len);
+char *StrCopy(char *dest, char *src);
+int Strcmp(char *s1, char *s2);
+size_t prin_argv(char **argv);
+int printPathAtt(char** PathArr, char** argv);
+size_t printDblArr(char** DblArr, size_t NullTrm);
+
+
+/**/
+
+
+int Inter_Active();
+int Non_Inter_Ative();
+
+char  **tokenize(char *cmd, char*  delim);
+char **TokenEnvfPath();
+
+int executeCommand(char *command, char **argv);
+
+ char *SearchIntEnv(char *startWith);
+
+/*memory management*/
+size_t freeDoubleArray(char **argv);
+void EXIT();
+
+
+/* befExe*/
+char *isExecuteable(char **PathArr ,char **argv);
+char *mrgCmdAndPath(char *currPath ,char *cmdName);
+int Execute(void);
+
+
+
+#endif
+/*
+Valgrind Full Flag
+valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all ./hsh
+*/#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+ char *SearchIntEnv(char *startWith)
+{
+	extern char **environ;
+
+	if (!environ)
+		DEBUG("environ  ")
+	char **s = environ;
+		if (!s)
+			DEBUG("s  ")
+	for (; *s; s++ )
+	/* && s[i][5] != '\0' && s[i][5] != ' ' */
+		if (!strncmp(startWith, *s, 5 ) )
+		{
+			char *tmp = *s;
+			tmp += 5;
+			return (tmp);
+		}
+
+return (NULL);
+}
+/**
+ * @brief
+ *
+ * @return char**
+ */
+char **TokenEnvfPath()
+{
+	DEBUG("  ")
+	size_t i, j;
+	/* copy the Enviroment path  antoher string so we doont tokenize the system path*/
+	DEBUG("  ")
+
+	char* envPath = strdup(SearchIntEnv("PATH="));
+	if (!envPath )
+	{
+
+		DEBUG(" (null envPath ")
+		EXIT();
+		return (NULL);
+	}
+	/* inctrement the string pointer which store the  path copy py 5 (0 -> 4)  to strart point the charcter after "PATH="   */
+	DEBUG("  ")
+
+
+
+	DEBUG("  ")
+	char **Array = tokenize(envPath, ":");
+	DEBUG("  ")
+
+
+	return (Array);
+}
+#include "main.h"
+
+int Inter_Active()
+
+{
+	write(STDIN_FILENO, "=> ", 3);
+
+	status = getline(&command, &getLine, stdin);
+	if (status == -1)
+		EXIT();
+	/* "exit\n" == command =>0   !=>0   == 1 condation true*/
+	if (!strcmp("exit\n", command))
+		EXIT();
+	cmd_args = tokenize(command, " \n");
+	DEBUG(" ")
+
+	printDblArr(cmd_args,0);
+	DEBUG(" Execute();")
+	Execute();
+	FreeVar(command);
+	DEBUG("FreeVar(command);  ")
+
+	FreeArr(cmd_args);
+	DEBUG("FreeArr(cmd_args); ")
+
+
+	return (0);
+}
+
+#include "main.h"
+#include <errno.h>
+#include <stdio.h>
+int Non_Inter_Ative()
+{
+	printf("\n\n\n                   NON INTERACIVE Wait for the opening soon \n\n\n");
+ // EHOSTUNREACH
+	while (1)
+	{
+		status = getline(&command, &getLine, stdin);
+		if (status == -1)
+			EXIT();
+		if (!command || !cmd_args)
+				fprintf(stderr, "(NULL)%s :%i\n",__FILE__,__LINE__);
+
+		cmd_args = tokenize(command, " \n");
+		printDblArr(cmd_args, 0);
+
+	}
+	return (0);
+}
+#include "main.h"
+size_t printDblArr(char** DblArr, size_t NullTrm)
+{
+	size_t i, j;
+	if (NullTrm >  0)
+		j = NullTrm;
+	else if (NullTrm == 0)
+		for (j = 0; DblArr[j]; j++)
+			if (DblArr[j] == NULL)
+				return (0);
+
+	for (i = 0; i < j; i++)
+		printf("[%zu] - %s  \n", i,DblArr[i]);
+
+	return (i);
+}
+size_t prin_argv(char **argv)
+{
+	size_t i,j;
+	for (i = 0; argv[i]; i++)
+		for (j = 0; argv[i][j] != '\0'; j++)
+			putchar(argv[i][j]);
+	return (j);
+}
+#include "main.h"
+
+int  Execute(void)
+{
+
+
+	if (!strcmp("ENV", cmd_args[0]))
+		{
+				DEBUG("  ")
+
+			PathArr = TokenEnvfPath();
+			PathArr[1] = "===>";
+			DEBUG("PathArr[1] = \"===>\";  ")
+			// if (!PathArr)
+			// {
+			// 	fprintf(stderr, "somthing Went Wrong (: %s :%d \n",__FILE__,__LINE__);
+			// 	EXIT();
+			// }
+				DEBUG("  ")
+
+			// printDblArr(PathArr, 0);
+			DEBUG("printDblArr(PathArr, 0); ")
+
+			FreeArr(PathArr);
+			DEBUG("FreeArr(PathArr);")
+
+		}
+
+	return (0);
+
+}#include "main.h"
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char  **tokenize(char *cmd, char*  delim)
+{
+	size_t TksNum = 0;
+	char *token = NULL, **Tokens = NULL;
+
+	token = strtok(cmd, delim);
+	while (token)
+	{
+		if (cmd== NULL)
+		{
+			continue;
+		}
+		Tokens = realloc(Tokens, sizeof(char *) * (TksNum + 1));
+
+		if (!Tokens)
+		{
+			freeDoubleArray(Tokens);
+			perror("tokenaize.c:21 realloc");
+			return (NULL);
+		}
+	/* tokinize && Asign */
+		Tokens[TksNum] = strdup(token);
+		// printf("tenize.c:25 %s\n",Tokens[TksNum]);
+		token = strtok(NULL, delim);
+		TksNum++;
+
+
+	}
+
+		Tokens = realloc(Tokens, (sizeof(char *) * (TksNum + 1)));
+		if (!Tokens)
+		{
+			freeDoubleArray(Tokens);
+			perror("tokenaize.c:21 realloc");
+			return (NULL);
+		}
+
+
+		Tokens[TksNum] = NULL;
+
+			return (Tokens);
+}
+
+
+#include "main.h"
+#include <errno.h>
+#include <stdlib.h>
+#include <string.h>
+/*
+Docker >> inveromint for build and run apps outside of opration system
+*/
+ size_t getLine = 0;
+ int status, interActicve;
+ char *command = NULL,**cmd_args = NULL, **PathArr = NULL;
+int main( int argc, char **argv)
+{
+
+	int interActicve = isatty(STDIN_FILENO);
+	if( interActicve)
+	{
+			while(1)
+		{
+			Inter_Active();
+
+		}
+	}
+	else
+	{
+		Non_Inter_Ative();
+
+	}
+
+	return (0);
+}
+#include "main.h"
+
+size_t freeDoubleArray(char **argv)
+{
+	size_t i, j;
+
+	for (j = 0; argv[j]; j++)
+			;
+	for (i = 0; i < j; i++)
+		if(argv[i])
+		{
+
+			free(argv[i]);
+			argv[i] = NULL;
+ 		}
+
+
+
+	if(argv)
+	{
+	free(argv);
+	argv = NULL;
+	}
+	return (i);
+}
+
+void EXIT()
+{
+			FreeVar(command);
+			FreeArr(cmd_args);
+			FreeArr(PathArr);
+			exit(127);
+}

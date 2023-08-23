@@ -28,5 +28,6 @@ void EXIT()
 {
 			FreeVar(command);
 			FreeArr(cmd_args);
+			FreeArr(PathArr);
 			exit(127);
 }

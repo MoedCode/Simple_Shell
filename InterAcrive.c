@@ -11,13 +11,19 @@ int Inter_Active()
 		EXIT();
 	/* "exit\n" == command =>0   !=>0   == 1 condation true*/
 	if (!strcmp("exit\n", command))
-	EXIT();
+		EXIT();
 	cmd_args = tokenize(command, " \n");
+	DEBUG(" ")
 
 	printDblArr(cmd_args,0);
-
+	DEBUG(" Execute();")
+	Execute();
 	FreeVar(command);
+	DEBUG("FreeVar(command);  ")
+
 	FreeArr(cmd_args);
+	DEBUG("FreeArr(cmd_args); ")
+
 
 	return (0);
 }

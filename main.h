@@ -14,11 +14,8 @@
 /*      GLOBAL VARABLS */
 extern size_t getLine ;
 extern int status;
-extern char *command ,**cmd_args ;
-/*
- **PathArr = NULL,*appName = NULL;
- */
-
+extern char *command ,**cmd_args , **PathArr;
+//*appName = NULL;
 
 /* MACROS */
 #define DEBUG(M) printf("%s%s:%d\n", M, __FILE__, __LINE__);
@@ -47,7 +44,6 @@ int printTS( char* s, size_t len);
 char *StrCopy(char *dest, char *src);
 int Strcmp(char *s1, char *s2);
 size_t prin_argv(char **argv);
-void printargv(char **argv);
 int printPathAtt(char** PathArr, char** argv);
 size_t printDblArr(char** DblArr, size_t NullTrm);
 
@@ -71,9 +67,9 @@ void EXIT();
 
 
 /* befExe*/
-char *isExecuteable(char **PathArr ,char **argv);
+char *isExecuteable();
 char *mrgCmdAndPath(char *currPath ,char *cmdName);
-void EXEECUTE(char **PathArr, char **argv);
+int Execute(void);
 
 
 

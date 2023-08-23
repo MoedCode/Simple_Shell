@@ -7,7 +7,7 @@ Docker >> inveromint for build and run apps outside of opration system
 */
  size_t getLine = 0;
  int status, interActicve;
- char *command = NULL,**cmd_args = NULL;
+ char *command = NULL,**cmd_args = NULL, **PathArr = NULL;
 int main( int argc, char **argv)
 {
 
@@ -17,6 +17,7 @@ int main( int argc, char **argv)
 			while(1)
 		{
 			Inter_Active();
+
 		}
 	}
 	else
