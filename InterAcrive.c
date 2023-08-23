@@ -4,6 +4,7 @@
 int Inter_Active()
 
 {
+	write(STDIN_FILENO, "=> ", 3);
 
 	status = getline(&command, &getLine, stdin);
 	if (status == -1)

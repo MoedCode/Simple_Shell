@@ -1,0 +1,4 @@
+whoami
+ls -la
+env
+
