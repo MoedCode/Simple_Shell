@@ -63,6 +63,7 @@ int executeCommand(char *command, char **argv);
 
 /*memory management*/
 size_t freeDoubleArray(char **argv);
+void FreeAll();
 void EXIT();
 
 

@@ -15,12 +15,20 @@ int  Execute(void)
 			DEBUG("printDblArr(PathArr, 0); ")
 
 			FreeArr(PathArray);
+			FreeAll();
 			DEBUG("FreeArr(PathArr);")
 
 		}
-	DEBUG(" exePath = isExecuteable();");
-	// exePath = isExecuteable();
-	printf(":: Executable Path is >> %s %s :%i",exePath , __FILE__,__LINE__);
+	// DEBUG(" exePath = isExecuteable();");
+	exePath = isExecuteable();
+	printf("Executable PAth %s \n",exePath);
+	DEBUG(" ")
+	FreeVar(exePath);
+
+	// if (exePath)
+	// 	printf(":: Executable Path is >> %s %s :%i",exePath , __FILE__,__LINE__);
+	// else
+	//  	printf("(NULL Executable Path ) %s :%i", __FILE__,__LINE__);;
 
 	return (0);
 

@@ -12,14 +12,21 @@ int Inter_Active()
 	/* "exit\n" == command =>0   !=>0   == 1 condation true*/
 	if (!strcmp("exit\n", command))
 		EXIT();
+
 	cmd_args = tokenize(command, " \n");
-	DEBUG(" ")
+	// DEBUG(" ")
 
 	printDblArr(cmd_args,0);
-	DEBUG(" Execute();")
+	if (cmd_args == NULL || cmd_args[0] == NULL)
+	{
+		// continue to the next iteration of the loop
+		return 0; // or continue; if you're in a loop
+	}
+	// DEBUG(" Execute();")
+
 	Execute();
 	FreeVar(command);
-	DEBUG("FreeVar(command);  ")
+	// DEBUG("FreeVar(command);  ")
 
 	FreeArr(cmd_args);
 	DEBUG("FreeArr(cmd_args); ")

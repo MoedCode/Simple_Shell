@@ -12,7 +12,7 @@ char  **tokenize(char *cmd, char*  delim)
 	token = strtok(cmd, delim);
 	while (token)
 	{
-		if (cmd== NULL)
+		if (command == NULL)
 		{
 			continue;
 		}

@@ -31,3 +31,10 @@ void EXIT()
 			FreeArr(PathArr);
 			exit(127);
 }
+void FreeAll()
+{
+			FreeVar(command);
+			FreeArr(cmd_args);
+			FreeArr(PathArr);
+
+}
