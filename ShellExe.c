@@ -15,7 +15,7 @@ int  Execute(void)
 			DEBUG("printDblArr(PathArr, 0); ")
 
 			FreeArr(PathArray);
-			FreeAll();
+
 			DEBUG("FreeArr(PathArr);")
 
 		}

@@ -6,7 +6,7 @@ size_t freeDoubleArray(char **argv)
 
 	for (j = 0; argv[j]; j++)
 			;
-	for (i = 0; i < j; i++)
+	for (i = 0; i <= j; i++)
 		if(argv[i])
 		{
 
