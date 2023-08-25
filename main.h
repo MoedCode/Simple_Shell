@@ -13,8 +13,8 @@
 
 /*      GLOBAL VARABLS */
 extern size_t getLine ;
-extern int status;
-extern char *command ,**cmd_args , **PathArr;
+extern int status, pp_status,Execve;
+extern char *command ,**cmd_args , **PathArr, *app_name;
 //*appName = NULL;
 
 /* MACROS */
@@ -57,7 +57,8 @@ int Non_Inter_Ative();
 char  **tokenize(char *cmd, char*  delim);
 char **TokenEnvfPath();
 
-int executeCommand(char *command, char **argv);
+int executeCommand(char *PATH);
+
 
  char *SearchIntEnv(char *startWith);
 

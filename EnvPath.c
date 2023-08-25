@@ -6,17 +6,13 @@
  char *SearchIntEnv(char *startWith)
 {
 	extern char **environ;
-
-	if (!environ)
-		DEBUG("environ  ")
 	char **s = environ;
-		if (!s)
-			DEBUG("s  ")
+
 	for (; *s; s++ )
 	/* && s[i][5] != '\0' && s[i][5] != ' ' */
 		if (!strncmp(startWith, *s, 5 ) )
 		{
-			DEBUG("  ")
+
 			return (*s);
 		}
 
@@ -41,7 +37,7 @@ char **TokenEnvfPath()
 		return (NULL);
 	}
 	else {
-			DEBUG("  ")
+
 
 	}
 	/* inctrement the string pointer which store the  path copy py 5 (0 -> 4)  to strart point the charcter after "PATH="   */
@@ -51,7 +47,7 @@ char **TokenEnvfPath()
 	char **Array = tokenize(envPath, ":=");
 	FreeVar(envPath);
 
-			DEBUG("  ")
+
 
 	return (Array);
 }
