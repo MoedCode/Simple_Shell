@@ -29,7 +29,7 @@ void EXIT()
 			FreeVar(command);
 			FreeArr(cmd_args);
 			FreeArr(PathArr);
-			exit(127);
+			exit(Exit_Status);
 }
 void FreeAll()
 {

@@ -13,7 +13,7 @@
 
 /*      GLOBAL VARABLS */
 extern size_t getLine ;
-extern int status, pp_status,Execve;
+extern int status, pp_status,Execve, Exit_Status;
 extern char *command ,**cmd_args , **PathArr, *app_name;
 //*appName = NULL;
 

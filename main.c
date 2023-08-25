@@ -6,7 +6,7 @@
 Docker >> inveromint for build and run apps outside of opration system
 */
  size_t getLine = 0;
- int status, interActicve;
+ int status, interActicve, Exit_Status;
  char *command = NULL,**cmd_args = NULL ,**PathArr = NULL, *app_name = NULL;
 int main( int argc, char **argv)
 {
