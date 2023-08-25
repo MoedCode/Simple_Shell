@@ -39,25 +39,6 @@ int Inter_Active()
 
 
 	cmd_args = tokenize(command, " \n");
-	int exit1, exit2;
-	exit1 = !strcmp("exit\n", cmd_args[0]);
-	exit2 = !strcmp("exit", cmd_args[0]);
-
-	if ( exit1 || exit2)
-	{
-		if (cmd_args[1])
-		{	int i;
-				for (i = 0; cmd_args[1][i] != '\0'; i++)
-				{
-					if (!((cmd_args[1][i] - 48) >= 0 && (cmd_args[1][i] - 48) <= 9))
-					{
-						EXIT();
-					}
-				}
-			Exit_Status = atoi(cmd_args[1]);
-		}
-		EXIT();
-	}
 
 
 	if (cmd_args == NULL || cmd_args[0] == NULL)
@@ -65,9 +46,10 @@ int Inter_Active()
 		// continue to the next iteration of the loop
 		return 0; // or continue; if you're in a loop
 	}
-
+	if_Exit();
 
 	Execute();
+
 
 	FreeVar(command);
 

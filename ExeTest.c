@@ -34,10 +34,11 @@ char *isExecuteable()
 {
 	size_t i = 0, j = 0,k = 0;
 
-	char* isPathExe = NULL, **PathArray = TokenEnvfPath();
+	char* isPathExe = NULL;
+	Path_Array = TokenEnvfPath();
 
 
-	while (PathArray[j])
+	while (Path_Array[j])
 		j++;
 	// printf("=> %zu",j);
 
@@ -45,18 +46,18 @@ char *isExecuteable()
 	for (; i < j; i++)
 
 			{
-				char *isPathExe = mrgCmdAndPath(PathArray[i], cmd_args[0]);
-				// printf("{path [%s] cmd [%s]} %s :%i",PathArray[i], cmd_args[0],__FILE__, __LINE__);
+				char *isPathExe = mrgCmdAndPath(Path_Array[i], cmd_args[0]);
+				// printf("{path [%s] cmd [%s]} %s :%i",Path_Array[i], cmd_args[0],__FILE__, __LINE__);
 				k++;
 				if (isPathExe)
 					{
-					FreeArr(PathArray);
+					FreeArr(Path_Array);
 					return (isPathExe);
 					}
 			}
 
 			// printf("k[%zu],j[%zu],%s%d\n",k,j,__FILE__,__LINE__);
-	FreeArr(PathArray);
+	FreeArr(Path_Array);
 
 	return (NULL);
 }

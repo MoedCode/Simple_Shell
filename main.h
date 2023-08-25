@@ -14,7 +14,7 @@
 /*      GLOBAL VARABLS */
 extern size_t getLine ;
 extern int status, pp_status,Execve, Exit_Status;
-extern char *command ,**cmd_args , **PathArr, *app_name;
+extern char *command ,**cmd_args,**Path_Array , *app_name;
 //*appName = NULL;
 
 /* MACROS */
@@ -64,6 +64,9 @@ int executeCommand(char *PATH);
 
 /*memory management*/
 size_t freeDoubleArray(char **argv);
+
+void if_Exit();
+
 void FreeAll();
 void EXIT();
 
@@ -71,6 +74,7 @@ void EXIT();
 /* befExe*/
 char *isExecuteable();
 char *mrgCmdAndPath(char *currPath ,char *cmdName);
+int  is_CorrectPath();
 int Execute(void);
 
 

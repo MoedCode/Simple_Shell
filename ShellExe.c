@@ -1,5 +1,7 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
  int pp_status, Execve;
 	extern char **environ;
@@ -14,7 +16,7 @@ int executeCommand(char *PATH)
 
 	if (pid == 0) {
 		// Child process
-		Execve = execve(PATH, cmd_args,NULL);
+		Execve = execve(PATH, cmd_args,environ);
 		if (Execve == -1)
 		{
 
@@ -53,6 +55,7 @@ int  Execute(void)
 		}
 
 	// DEBUG(" exePath = isExecuteable();");
+
 	exePath = isExecuteable();
 	if (exePath)
 	{
@@ -61,10 +64,21 @@ int  Execute(void)
 	FreeVar(exePath);
 	// FreeAll();
 	}
-	else{
+	else if (is_CorrectPath())
+	{
 
 		printf("%s: 1: %s: not found\n",app_name, cmd_args[0]);
 		return (127);
 	}
 	return (execve_status);
+}
+int  is_CorrectPath()
+{
+	if ((access(cmd_args[0], X_OK)  == 0))
+		{
+
+			executeCommand(cmd_args[0]);
+			return (0);
+		}
+	return (1);
 }
