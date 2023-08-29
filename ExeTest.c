@@ -1,5 +1,8 @@
 #include "main.h"
+#include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 char *mrgCmdAndPath(char *currPath ,char *cmdName)
 {
 
@@ -62,3 +65,46 @@ char *isExecuteable()
 	return (NULL);
 }
 
+/*
+
+*/
+
+
+int exe_mul_cmd()
+{
+// char *mulCmd = strdup(command);
+char  **cmd_argsA, **tmp, *delim = ";";
+	size_t i, len = strlen(command);
+
+	cmd_argsA = tokenize(command,delim);
+
+
+	for (i = 0;cmd_argsA[i]; i++)
+	{
+		cmd_args = tokenize(cmd_argsA[i], " ");
+
+		Execute();
+		FreeArr(cmd_args);
+
+	}
+	FreeVar(command);
+	FreeArr(cmd_argsA)
+		return (0);
+}
+
+int is_Multi_Cmd()
+{
+
+	size_t i;
+	for (i = 0; command[i] != '\n'; i++)
+	{
+		if (command[i] == ';')
+		{
+			exe_mul_cmd();
+			break;
+
+		}
+	}
+
+	return (0);
+}

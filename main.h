@@ -46,6 +46,8 @@ int Strcmp(char *s1, char *s2);
 size_t prin_argv(char **argv);
 int printPathAtt(char** PathArr, char** argv);
 size_t printDblArr(char** DblArr, size_t NullTrm);
+size_t  printInd(char *str, size_t len);
+
 
 
 /**/
@@ -73,6 +75,7 @@ void EXIT();
 
 /* befExe*/
 char *isExecuteable();
+int is_Multi_Cmd();
 char *mrgCmdAndPath(char *currPath ,char *cmdName);
 int  is_CorrectPath();
 int Execute(void);

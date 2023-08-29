@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stddef.h>
+#include <stdio.h>
 size_t printDblArr(char** DblArr, size_t NullTrm)
 {
 	size_t i, j;
@@ -21,4 +23,30 @@ size_t prin_argv(char **argv)
 		for (j = 0; argv[i][j] != '\0'; j++)
 			putchar(argv[i][j]);
 	return (j);
+}
+
+size_t  printInd(char *str, size_t len)
+{
+	size_t i = 0;
+		while (i < len)
+	{
+		if (str[i] == '\0')
+		{
+			putchar('\\');
+			putchar('0');
+			i++;
+		}
+		if (str[i] == '\n')
+		{
+			putchar('\\');
+			putchar('n');
+			i++;
+		}
+		putchar(str[i]);
+		i++;
+
+	}
+	putchar(10);
+
+return (i);
 }

@@ -37,23 +37,29 @@ int Inter_Active()
 	*/
 	/* "exit\n" == command =>0   !=>0   == 1 condation true*/
 
-
-	cmd_args = tokenize(command, " \n");
-
-
-	if (cmd_args == NULL || cmd_args[0] == NULL)
-	{
-		// continue to the next iteration of the loop
-		return 0; // or continue; if you're in a loop
-	}
-	if_Exit();
-
-	Execute();
+	is_Multi_Cmd();
+	if (command)
+	{	cmd_args = tokenize(command, " \n");
 
 
-	FreeVar(command);
+		if (cmd_args == NULL || cmd_args[0] == NULL)
+		{
+			// continue to the next iteration of the loop
+			return 0; // or continue; if you're in a loop
+		}
 
-	FreeArr(cmd_args);
+		if_Exit();
+
+		Execute();
+
+
+		FreeVar(command);
+
+		FreeArr(cmd_args);
+		}
+	else
+		Inter_Active();
 	return (0);
-}
+	}
 
+//+201203114511
