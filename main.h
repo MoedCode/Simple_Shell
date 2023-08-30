@@ -39,14 +39,14 @@ extern char *command ,**cmd_args,**Path_Array , *app_name;
 
 /* String.c */
 
-int Putchar(char c);
-int printTS( char* s, size_t len);
-char *StrCopy(char *dest, char *src);
-int Strcmp(char *s1, char *s2);
 size_t prin_argv(char **argv);
-int printPathAtt(char** PathArr, char** argv);
 size_t printDblArr(char** DblArr, size_t NullTrm);
 size_t  printInd(char *str, size_t len);
+size_t print_ascii(char *str, size_t len);
+size_t null_Terminate(char *string, char a, char b, size_t len);
+
+
+
 
 
 

@@ -74,7 +74,10 @@ int exe_mul_cmd()
 {
 // char *mulCmd = strdup(command);
 char  **cmd_argsA, **tmp, *delim = ";";
+
 	size_t i, len = strlen(command);
+
+	null_Terminate(command,10, 0,len);
 
 	cmd_argsA = tokenize(command,delim);
 
