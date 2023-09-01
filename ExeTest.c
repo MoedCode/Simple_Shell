@@ -101,8 +101,22 @@ int is_Multi_Cmd()
 	size_t i;
 	for (i = 0; command[i] != '\n'; i++)
 	{
-		if (command[i] == ';')
+		if (command[i] == ';' || command[i] == '&')
 		{
+			if (( command[i] == ';' || command[i] == '&') && ( (command[i + 1] == ';' || command[i + 1] == '&' )|| command[i + 1 ] == '\n') )
+				{
+					printf("%s syntax error near unexpected token`",app_name);
+					if(command[i])
+						putchar(command[i]);
+					if (command[i + 1] && command[i + 1] != '\n')
+						putchar(command[ i +1]);
+					putchar('\'');
+					putchar(10);
+					FreeAll();
+					return (0);
+
+				}
+
 			exe_mul_cmd();
 			break;
 
